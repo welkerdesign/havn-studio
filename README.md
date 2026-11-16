@@ -8,4 +8,6 @@ V29 reshapes the front fender corner, adds prominent bonnet vents and tubular ca
 
 This is an independent, unofficial design study, based on photographs and the supplied model rather than factory CAD. Pricing is a dated research snapshot. The site does not collect orders or contact a manufacturer.
 
+T-33 product 001 is the requested Owl Ridgeline MAX (Sprinter EKKO variant) with Mojab EW135 winch. It replaces the catalog bumper and Warn winch selections, with a distinct photo-derived Three.js preview. This product is not yet in the native Unreal scene, so selecting it keeps the viewer in Three.js. Separately listed parts start at $4,490; final EKKO/bundle pricing and fitment require supplier confirmation. The payload tracker records Owl's published 220 lb bumper weight against the owner's approximate 1,800 lb post-build allowance. Winch physical mass, removed-part credit, installation mass and other loads remain unresolved; 1,580 lb after known parts is partial arithmetic, not certified remaining payload or an axle-safety result.
+
 This repository contains the generated testing site and public assets. Source development and the Unreal project are maintained separately. Environment provenance is in `environments/LICENSE.md`; Three.js licensing is in `licenses/THREE-LICENSE.txt`; Pixel Streaming licensing is in `licenses/PIXEL-STREAMING-LICENSE.md`.
