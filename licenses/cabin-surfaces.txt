@@ -1,0 +1,9 @@
+The Three.js interior uses these Poly Haven scans under CC0 1.0.
+
+- Oak Veneer 01 and Walnut Veneer by Jenelle van Heerden, https://polyhaven.com/a/oak_veneer_01 and https://polyhaven.com/a/walnut_veneer
+- Leather Red 02 by Rob Tuytel, https://polyhaven.com/a/leather_red_02
+- Rough Linen by Rico Cilliers and colormass, https://polyhaven.com/a/rough_linen
+
+https://polyhaven.com/license
+
+The display assets are locally hosted JPEG derivatives of the 1K downloads. Color maps retain 1024-pixel resolution. Linear normal and roughness maps are downsampled to 512 pixels. The wood uses base color, OpenGL normal and roughness. The textiles use surface-detail maps with the configurator upholstery colors.
