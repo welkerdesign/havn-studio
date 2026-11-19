@@ -47,3 +47,5 @@ All six maps below are unchanged 1024 × 1024 official JPG downloads. Diffuse/al
 - `ground/forest_ground_04_rough_1k.jpg` — 627,507 bytes. [Original download](https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/forest_ground_04/forest_ground_04_rough_1k.jpg).
 
 Complete SHA-256 hashes, lighting measurements and rendering notes are recorded in `research/SCENERY-V20.md` in the source package (also shipped as `docs/research-SCENERY-V20.md` by the release script).
+
+The browser uses locally encoded WebP derivatives of both CC0 photographic panoramas. Desktop uses the original 8192 × 4096 resolution. The mobile version uses a 4096 × 2048 Lanczos downsample. Both versions use quality 86 and retain the source orientation.
