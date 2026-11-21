@@ -10,7 +10,8 @@ globalThis.HavnWasher = (() => {
     {id:'soak-rinse', name:'Soak & rinse', detail:'Ten-minute soak followed by one fresh rinse', washLevel:135, rinseLevel:131.5, rpm:24, stroke:10, rest:5, wetout:30, wash:0, soak:600, rinse:60, rinses:1, spin:500, hold:90},
     {id:'rinse', name:'Rinse & spin', detail:'One fresh-water rinse and extraction', washLevel:null, rinseLevel:131.5, rpm:35, stroke:6, rest:1, wetout:30, wash:0, rinse:60, rinses:1, spin:700, hold:120}
   ].map(Object.freeze);
-  const limits = Object.freeze({lowSumpL:0.065, lowStableS:2, levelStableS:4, stopStableS:3, drainTimeoutS:60});
+  const limits = Object.freeze({lowSumpL:0.065, lowStableS:2, levelStableS:4, stopStableS:3, drainTimeoutS:60, fillTimeoutS:180});
+  const freshCapacityL=3.5*3.785411784;
 
   function makePlan(id, extra=false) {
     const p = programs.find(program => program.id === id);
@@ -24,10 +25,10 @@ globalThis.HavnWasher = (() => {
     for (let i=1; i<=p.rinses; i++) baths.push({label:'Rinse '+i, level:p.rinseLevel, seconds:p.rinse, soak:0});
     for (const [index,bath] of baths.entries()) {
       const label = bath.label;
-      phase('fill', label+' · manual fill', null, 0, false, {levelMm:bath.level});
+      phase('fill', label+' · fill from tank', null, 0, false, {levelMm:bath.level,bathIndex:index,topUp:false});
       phase('tumble', label+' · wet out', p.wetout, p.rpm);
       phase('settle', label+' · settle', 3);
-      phase('fill', label+' · check and top up', null, 0, false, {levelMm:bath.level});
+      phase('fill', label+' · check and top up', null, 0, false, {levelMm:bath.level,bathIndex:index,topUp:true});
       if (bath.soak) phase('soak', 'Soak · hold', bath.soak);
       if (bath.seconds) phase('tumble', label+' · tumble', bath.seconds, p.rpm);
       phase('stop', label+' · confirm standstill', null);
@@ -63,7 +64,7 @@ globalThis.HavnWasher = (() => {
       this.program=programs.find(p=>p.id===id);
       this.extra=id==='bedding' && extra;
       this.steps=makePlan(id,this.extra);
-      this.index=0; this.age=0; this.stable=0; this.elapsed=0; this.fault='';
+      this.index=0; this.age=0; this.stable=0; this.elapsed=0; this.fault=''; this.inletOpen=false;
     }
     get step() { return this.steps[this.index]; }
     get done() { return this.index>=this.steps.length; }
@@ -78,6 +79,7 @@ globalThis.HavnWasher = (() => {
     }
     next() { this.index++; this.age=0; this.stable=0; }
     tick(f) {
+      this.inletOpen=false;
       if (this.done || this.fault) return;
       const s=this.step, low=f.sumpL>=0 && f.sumpL<=limits.lowSumpL;
       this.age++; this.elapsed++;
@@ -91,9 +93,13 @@ globalThis.HavnWasher = (() => {
         this.fault='Closed drain required for this bath'; return;
       }
       if (s.kind==='fill') {
+        if(!Number.isFinite(f.levelMm)){this.fault='Tub level unavailable';return;}
         const reached=f.levelMm>=s.levelMm && f.stopped;
+        if(f.levelMm<s.levelMm && !f.freshAvailable){this.fault='Fresh tank empty before target level';return;}
+        if(this.age>=limits.fillTimeoutS){this.fault='Preset fill level timed out';return;}
+        this.inletOpen=f.stopped && f.levelMm<s.levelMm;
         this.stable=reached?this.stable+1:0;
-        if (this.stable>=limits.levelStableS && f.fillConfirmed) this.next();
+        if (this.stable>=limits.levelStableS) this.next();
       } else if (s.kind==='drain' || s.kind==='empty-stop') {
         const empty=f.open && !f.closed && low && f.stopped;
         this.stable=empty?this.stable+1:0;
@@ -111,5 +117,26 @@ globalThis.HavnWasher = (() => {
       } else if (this.age>=s.seconds) this.next();
     }
   }
-  return Object.freeze({programs:Object.freeze(programs), limits, makePlan, motorTarget, Cycle});
+  // Preview feedback for a manually charged reservoir. The controller above
+  // uses only sensor level. Charge estimates never command litres or valve time.
+  class PreviewSupply {
+    constructor(litres=freshCapacityL){this.remainingL=litres;this.step=null;}
+    level(step){
+      if(step.kind!=='fill')return 0;
+      if(this.step!==step){
+        this.step=step;
+        const initial=[4.56,2.59,2.63][step.bathIndex];
+        const litresPerMm=(5.006-3.643)/(138-125); // Two FL22 CAD waterline cuts.
+        this.litresPerMm=litresPerMm;
+        this.neededL=step.topUp?(step.bathIndex===0?.58:.15):initial+(step.levelMm-131.5)*litresPerMm;
+      }
+      return step.levelMm-this.neededL/this.litresPerMm;
+    }
+    flow(open){
+      if(!open)return;
+      const draw=Math.min(.12,this.neededL,this.remainingL);
+      this.remainingL-=draw;this.neededL-=draw;
+    }
+  }
+  return Object.freeze({programs:Object.freeze(programs),limits,makePlan,motorTarget,Cycle,PreviewSupply,freshCapacityL});
 })();
