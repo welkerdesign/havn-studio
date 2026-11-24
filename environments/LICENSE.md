@@ -2,7 +2,7 @@
 
 All photographic assets in this directory and `ground/` are distributed by [Poly Haven under CC0](https://polyhaven.com/license). They may be used, modified and redistributed, including commercially. They are bundled locally; no runtime image service is required. The original authors are credited below for provenance.
 
-The outdoor scenes are visual interpretations of the Arizona desert and Colorado in fall. These panoramas are not represented as photography from those states. The vehicle and near ground are interactive 3D; the photographed far horizon has no geometric parallax.
+The desert and fall settings use real landscapes photographed in other regions. The interactive vehicle casts shadows onto a ground-projected panorama. Orbiting reveals the full capture around the vehicle.
 
 ## Studio lighting
 
@@ -49,3 +49,9 @@ All six maps below are unchanged 1024 × 1024 official JPG downloads. Diffuse/al
 Complete SHA-256 hashes, lighting measurements and rendering notes are recorded in `research/SCENERY-V20.md` in the source package (also shipped as `docs/research-SCENERY-V20.md` by the release script).
 
 The browser uses locally encoded WebP derivatives of both CC0 photographic panoramas. Desktop uses the original 8192 × 4096 resolution. The mobile version uses a 4096 × 2048 Lanczos downsample. Both versions use quality 86 and retain the source orientation.
+
+## Beach, alpine snow and time of day
+
+The beach uses the photographed shoreline and daylight HDR from [Secluded Beach](https://polyhaven.com/a/secluded_beach). The snow-covered Fall setting uses [Lago di Isola](https://polyhaven.com/a/lago_disola). Its WebP derivatives include a static snow treatment on the banks and branches. All outdoor scene cards and skyline masks derive from their respective CC0 panoramas. The masks let the viewer replace the sky while retaining the photographed treetops and ridgelines.
+
+The sunrise and sunset skies use the 2K radiance maps from [Qwantani Sunrise (Pure Sky)](https://polyhaven.com/a/qwantani_sunrise_puresky) and [Evening Road 01 (Pure Sky)](https://polyhaven.com/a/evening_road_01_puresky). The viewer aligns the direct light with the measured sun in each capture and builds reflections from the resulting scene.
