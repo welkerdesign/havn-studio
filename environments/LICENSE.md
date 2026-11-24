@@ -1,8 +1,12 @@
 # Environment assets — sources and license
 
-All photographic assets in this directory and `ground/` are distributed by [Poly Haven under CC0](https://polyhaven.com/license). They may be used, modified and redistributed, including commercially. They are bundled locally; no runtime image service is required. The original authors are credited below for provenance.
+The Sedona panorama and its derivatives use CC BY-SA 4.0. The remaining photographic assets in this directory and `ground/` are distributed by [Poly Haven under CC0](https://polyhaven.com/license). All assets are bundled locally.
 
-The desert and fall settings use real landscapes photographed in other regions. The interactive vehicle casts shadows onto a ground-projected panorama. Orbiting reveals the full capture around the vehicle.
+## Sedona, Arizona
+
+Photographer **zv35**, July 9, 2023, near Andante Trailhead in Sedona (34.879553, −111.811702). [Original photograph on Panoramax](https://panoramax.openstreetmap.fr/#focus=pic&pic=ebc200a2-8d9b-4514-b50b-92c9361f6424) · [Capture metadata and original download](https://api.panoramax.xyz/api/collections/0089f59b-da70-4214-838a-140dba5a52a9/items/ebc200a2-8d9b-4514-b50b-92c9361f6424).
+
+The photograph and the modified `sedona_*` assets are licensed under [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/). HAVN completed the small uncaptured areas directly above and below the camera using adjacent sky and trail detail. The derivatives include two resized panoramas, a card crop, a skyline mask and an estimated lighting map from the same photograph. The viewer simulates different times of day.
 
 ## Studio lighting
 
@@ -16,7 +20,7 @@ Original 1K HDR: https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_sma
 
 Used as a reflection and lighting map; the visible white studio remains procedural. This adds no runtime service dependency.
 
-## Desert lighting and horizon
+## Legacy Goegap lighting and horizon
 
 [Goegap](https://polyhaven.com/a/goegap), by **Greg Zaal** / Poly Haven:
 
@@ -52,6 +56,6 @@ The browser uses locally encoded WebP derivatives of both CC0 photographic panor
 
 ## Beach, alpine snow and time of day
 
-The beach uses the photographed shoreline and daylight HDR from [Secluded Beach](https://polyhaven.com/a/secluded_beach). The snow-covered Fall setting uses [Lago di Isola](https://polyhaven.com/a/lago_disola). Its WebP derivatives include a static snow treatment on the banks and branches. All outdoor scene cards and skyline masks derive from their respective CC0 panoramas. The masks let the viewer replace the sky while retaining the photographed treetops and ridgelines.
+The [Secluded Beach](https://polyhaven.com/a/secluded_beach) shoreline is in Cape Town, South Africa (−33.982225, 18.361642). The autumn photograph is near Jugów, Poland (50.636232, 16.501003). The alpine photograph shows [Lago d’Isola](https://polyhaven.com/a/lago_disola) near San Bernardino, Switzerland (46.450379, 9.189087). Its WebP derivatives include a static snow treatment on the banks and branches. The skyline masks preserve photographed treetops and ridgelines as the light changes.
 
 The sunrise and sunset skies use the 2K radiance maps from [Qwantani Sunrise (Pure Sky)](https://polyhaven.com/a/qwantani_sunrise_puresky) and [Evening Road 01 (Pure Sky)](https://polyhaven.com/a/evening_road_01_puresky). The viewer aligns the direct light with the measured sun in each capture and builds reflections from the resulting scene.
