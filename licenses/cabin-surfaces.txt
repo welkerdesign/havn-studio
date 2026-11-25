@@ -7,3 +7,5 @@ The Three.js interior uses these Poly Haven scans under CC0 1.0.
 https://polyhaven.com/license
 
 The display assets are locally hosted JPEG derivatives of the 1K downloads. Color maps retain 1024-pixel resolution. Linear normal and roughness maps are downsampled to 512 pixels. The wood uses base color, OpenGL normal and roughness. The textiles use surface-detail maps with the configurator upholstery colors.
+
+The flooring color maps in textures/flooring use the Rossmönster catalog photographs identified by sourceAsset for each flooring option in src/catalog.js. Their fine grain uses the Oak Veneer 01 scan credited above. The shared emboss and wear-layer maps and the staggered plank layout were generated for this visualization. The 1.22 m by 0.18 m plank dimensions are estimates.
